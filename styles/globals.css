@@ -7,6 +7,12 @@
 .btn-primary {
 	@apply bg-blue-900 text-white px-4 py-2 rounded-lg;
 }
+.btn-yes {
+	@apply bg-red-700 text-white px-4 py-2 rounded-lg;
+}
+.btn-no {
+	@apply bg-green-700 text-white px-4 py-2 rounded-lg;
+}
 
 input,
 textarea {
