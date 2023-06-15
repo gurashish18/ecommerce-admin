@@ -20,3 +20,11 @@ textarea:focus {
 h1 {
 	@apply text-blue-900 text-2xl;
 }
+thead {
+	@apply bg-blue-50 text-lg;
+}
+
+tr,
+td {
+	@apply border-2 border-blue-100 p-2;
+}
