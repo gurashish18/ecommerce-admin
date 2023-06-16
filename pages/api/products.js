@@ -15,18 +15,19 @@ export default async function handler(req, res) {
 	}
 	if (method === "POST") {
 		// create a product
-		const { name, description, price } = req.body;
+		const { name, description, price, images } = req.body;
 		const newProduct = await Product.create({
 			name,
 			description,
 			price,
+			images,
 		});
 
 		res.json(newProduct);
 	}
 	if (method === "PUT") {
-		const { name, description, price, _id } = req.body;
-		await Product.updateOne({ _id }, { name, description, price });
+		const { name, description, price, images, _id } = req.body;
+		await Product.updateOne({ _id }, { name, description, price, images });
 		res.json(true);
 	}
 	if (method === "DELETE") {
