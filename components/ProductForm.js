@@ -3,7 +3,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Layout from "./Layout";
 import Spinner from "./Spinner";
 
 export default function ProductForm({
