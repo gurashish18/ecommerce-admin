@@ -7,7 +7,11 @@ export default async function handler(req, res) {
 	const { method } = req;
 	await mongooseConnect();
 	if (method === "GET") {
-		res.json(await Category.find());
+		if (req.query?.id) {
+			res.json(await Category.findOne({ _id: req.query.id }));
+		} else {
+			res.json(await Category.find());
+		}
 	}
 	if (method === "POST") {
 		// create a product
@@ -23,10 +27,10 @@ export default async function handler(req, res) {
 	// 	await Product.updateOne({ _id }, { name, description, price, images });
 	// 	res.json(true);
 	// }
-	// if (method === "DELETE") {
-	// 	if (req.query?.id) {
-	// 		await Product.deleteOne({ _id: req.query?.id });
-	// 		res.json(true);
-	// 	}
-	// }
+	if (method === "DELETE") {
+		if (req.query?.id) {
+			await Category.deleteOne({ _id: req.query?.id });
+			res.json(true);
+		}
+	}
 }

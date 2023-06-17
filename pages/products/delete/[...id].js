@@ -29,7 +29,7 @@ export default function DeletePage() {
 	}, [id]);
 	return (
 		<Layout>
-			<h1>Are you sure you want to delete "{productInfo?.name}"</h1>
+			<h1>Are you sure you want to delete "{productInfo?.name}" ?</h1>
 			<div className="flex gap-4 mt-4">
 				<button className="btn-yes" onClick={deleteProduct}>
 					Yes

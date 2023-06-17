@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 
 export default function ProductForm({
@@ -11,17 +11,20 @@ export default function ProductForm({
 	description: exsistingDescription,
 	price: exsistingPrice,
 	images: exsistingImages,
+	category: exsistingCategory,
 }) {
 	const [name, setName] = useState(exsistingName || "");
 	const [description, setDescription] = useState(exsistingDescription || "");
 	const [price, setPrice] = useState(exsistingPrice || "");
 	const [isUploading, setIsUploading] = useState(false);
 	const [images, setImages] = useState(exsistingImages || []);
+	const [categories, setCategories] = useState([]);
+	const [category, setCategory] = useState(exsistingCategory || "");
 	const router = useRouter();
 
 	async function saveProduct(event) {
 		event.preventDefault();
-		const data = { name, description, price, images };
+		const data = { name, description, price, images, category };
 		if (_id) {
 			// update the product
 			await axios.put("/api/products", { ...data, _id });
@@ -52,6 +55,11 @@ export default function ProductForm({
 			setIsUploading(false);
 		}
 	}
+	useEffect(() => {
+		axios.get("/api/categories").then((res) => {
+			setCategories(res.data);
+		});
+	});
 	return (
 		<form onSubmit={saveProduct} className="flex flex-col h-full p-4">
 			<div className="flex flex-col mt-5 w-1/4">
@@ -63,6 +71,19 @@ export default function ProductForm({
 					value={name}
 					onChange={(event) => setName(event.target.value)}
 				/>
+				<label for="category">Category</label>
+				<select
+					name="category"
+					value={category}
+					onChange={(ev) => setCategory(ev.target.value)}
+				>
+					{categories?.length > 0 &&
+						categories?.map((category) => (
+							<option key={category._id} value={category._id}>
+								{category.name}
+							</option>
+						))}
+				</select>
 				{images?.length > 0 &&
 					images?.map((image) => (
 						<img

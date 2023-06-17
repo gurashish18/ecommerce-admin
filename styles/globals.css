@@ -15,11 +15,13 @@
 }
 
 input,
-textarea {
+textarea,
+select {
 	@apply border-2 border-gray-300 mb-2 rounded-lg p-2;
 }
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
 	@apply border-2 border-blue-900 mb-2 rounded-lg p-2;
 }
 
